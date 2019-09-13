@@ -2,7 +2,7 @@
 
 Chrome-utvidelse som automatisk lagrer svarene i INGInious. Neste gang du logger deg på for å fullføre øvingen, så fortsetter du der du slapp. Svarene lagres **ikke** på brukeren din, men i nettleseren din. Det betyr at du må bruke samme datamaskin med samme nettleser for å finne svarene dine igjen.
 
-Det enkleste er å installere den fra Chrome nettmarked: (her kommer link til chrome webstore)
+Det enkleste er å installere den fra Chrome nettmarked: https://chrome.google.com/webstore/detail/lagre-kladd-i-inginious/bilkdbfjjbggekiddbkblbaehjfiocic?hl=no
 
 Obs: Denne greia er under utvikling. Ikke forvent at alt er feilfritt.
 
@@ -12,9 +12,9 @@ Hver gang du endrer på en input i øvingen, så lagrer utvidelsen det nye svare
 
 Når du åpner en øving, så sjekker utvidelsen om alle inputer er tomme. Hvis alt er tomt, så antar den at du ønsker å hente fram kladden for å fortsette der du slapp - så da henter den fram svarene som den lagret sist.
 
-## Bugs og forbedringspotensiale
+## Bugs og todo
 
-* Itererer over den radioknappen man trykker en gang for mye
+* Itererer over den radioknappen man trykker en gang mer enn nødvendig. Kanskje droppe iterasjon og løse det annerledes
 * Tar enn så lenge bare hensyn til sjekkbokser og radioknapper
 * Lagrer ikke tekstsvar (kodeøvinger f.eks.)
 * Gjøre om fra local storage til sync

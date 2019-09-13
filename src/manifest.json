@@ -31,5 +31,5 @@
    "short_name": "Lagre kladd",
    "permissions": [ "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.0.1"
+   "version": "0.0.2"
 }
