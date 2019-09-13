@@ -6,7 +6,6 @@ $('input').change(function() {
 
 $(document).ready(function(){
 	if (isTestEmpty()) {
-		console.log('kjær');
 		getAnswers();
 	}
 });

@@ -23,4 +23,4 @@ Når du åpner en øving, så sjekker utvidelsen om alle inputer er tomme. Hvis 
 
 Det enkleste er å installere utvidelsen fra Chrome nettmarked (aka Chrome webstore).
 
-For å laste inn utvidelsen fra kildekoden må du gjøre følgende: Lag en zip-fil av kildekoden (src), endre filetternavnet til crx, og så last den inn i chrome på chrome://extensions. Hvis du gjør det så kommer den ikke til å oppdatere seg selv (som den gjør hvis du laster ned via Chrome nettmarked).
+For å laste inn utvidelsen fra kildekoden må du gjøre følgende: Åpne chrome://extensions i Chrome. Aktiver "Utviklermodus". Trykk på last inn upakket utvidelse. Naviger til Lagre-kladd-inginious/src/ og last inn derfra.
