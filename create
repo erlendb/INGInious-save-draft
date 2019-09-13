@@ -1,0 +1,27 @@
+#!/bin/bash
+
+BASE_NAME="lagre-kladd-inginious"
+
+VERSION=$(jq .version src/manifest.json)
+VERSION="${VERSION:1:-1}"
+
+echo "Creating crx/zip file for extension version $VERSION..."
+
+WRITE=true
+FILE=crx/$BASE_NAME-$VERSION.zip
+if test -f $FILE; then
+  WRITE=false
+  read -p "$BASE_NAME-$VERSION.zip already exists. Overwrite? (y/n) " -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+      WRITE=true
+  fi
+fi
+
+if [ "$WRITE" = true ]; then
+  cd src
+  zip -q -r ../crx/$BASE_NAME-$VERSION.zip *
+  echo "Created crx/$BASE_NAME-$VERSION.zip"
+else
+  echo "Didn't do anything."
+fi
