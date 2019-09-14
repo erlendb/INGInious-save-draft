@@ -1,7 +1,6 @@
 {
    "content_scripts": [ {
       "js": ["jquery.js", "inginious.js", "injector.js"],
-	  "css": ["inginious.css"],
       "matches": [ "*://*.algdat.idi.ntnu.no/*" ]
    } ],
    "description": "Med denne dingsen blir svarene dine lagret i INGInious :)",
