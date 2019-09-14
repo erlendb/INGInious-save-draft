@@ -10,6 +10,14 @@ $(document).ready(function(){
 	}
 });
 
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+	  if (request.message == "storeAnswers") {
+			storeAnswers();
+		}
+	}
+);
+
 function isTestEmpty() {
 	empty = true;
 	$('.panel-body').find('input').each(function() {
@@ -18,6 +26,12 @@ function isTestEmpty() {
 		}
 	});
 	return empty;
+}
+
+function storeAnswers() {
+	$('.panel-body').find('input').each(function() {
+		storeAnswer($(this), false);
+	});
 }
 
 function storeAnswer(inputElm, iterateRadios) {
