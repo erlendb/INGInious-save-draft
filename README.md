@@ -27,4 +27,4 @@ For å laste inn utvidelsen fra kildekoden må du gjøre følgende: Åpne chrome
 
 ### Enkel pakking av crx/zip-fil fra kildekode
 
-Kjør `./create`. Da zippes innholder i `src/`, og zipfila lagres i `crx/utvidelsenavn-versjon.zip`. Versjonsnummeret hentes fra `src/manifest.json`. Du blir spurt før skriptet eventuelt skriver over noe.
+Kjør `./create`. Da zippes innholdet i `src/`, og zipfila lagres i `crx/utvidelsenavn-versjon.zip`. Versjonsnummeret hentes fra `src/manifest.json`. Du blir spurt før skriptet eventuelt skriver over noe.
