@@ -8,7 +8,7 @@
     "persistent": false
    },
    "description": "Med denne dingsen blir svarene dine lagret i INGInious :)",
-   "homepage_url": "http://elendig.no/lagre-kladd-inginious",
+   "homepage_url": "https://github.com/erlendb/Lagre-kladd-inginious",
    "icons": {
       "128": "icons/icon-128.png",
       "64": "icons/icon-64.png",
