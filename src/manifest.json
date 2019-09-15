@@ -10,19 +10,19 @@
    "description": "Med denne dingsen blir svarene dine lagret i INGInious :)",
    "homepage_url": "http://elendig.no/lagre-kladd-inginious",
    "icons": {
-      "128": "icons/mlh_128.png",
-      "64": "icons/mlh_64.png",
-      "48": "icons/mlh_48.png",
-      "32": "icons/mlh_32.png",
-      "16": "icons/mlh_16.png"
+      "128": "icons/icon-128.png",
+      "64": "icons/icon-64.png",
+      "48": "icons/icon-48.png",
+      "32": "icons/icon-32.png",
+      "16": "icons/icon-16.png"
    },
    "browser_action": {
       "default_icon": {
-         "128": "icons/mlh_128.png",
-         "64": "icons/mlh_64.png",
-         "48": "icons/mlh_48.png",
-         "32": "icons/mlh_32.png",
-         "16": "icons/mlh_16.png"
+         "128": "icons/icon-128.png",
+         "64": "icons/icon-64.png",
+         "48": "icons/icon-48.png",
+         "32": "icons/icon-32.png",
+         "16": "icons/icon-16.png"
       },
 	  "default_title": "Lagre kladd i INGInious"
    },
