@@ -1,17 +1,20 @@
 #!/bin/bash
 
 BASE_NAME="lagre-kladd-inginious"
+SOURCE_DIR="src"
+OUTPUT_DIR="crx"
+FILE_EXTENSION=".zip"
 
-VERSION=$(jq .version src/manifest.json)
+VERSION=$(jq .version $SOURCE_DIR/manifest.json)
 VERSION="${VERSION:1:-1}"
 
-echo "Creating crx/zip file for extension version $VERSION..."
+echo "Packing extension $BASE_NAME version $VERSION..."
 
 WRITE=true
-FILE=crx/$BASE_NAME-$VERSION.zip
+FILE="$OUTPUT_DIR/$BASE_NAME-$VERSION$FILE_EXTENSION"
 if test -f $FILE; then
   WRITE=false
-  read -p "$BASE_NAME-$VERSION.zip already exists. Overwrite? (y/n) " -n 1 -r
+  read -p "$BASE_NAME-$VERSION$FILE_EXTENSION already exists. Overwrite? (y/n) " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]; then
       WRITE=true
@@ -19,9 +22,9 @@ if test -f $FILE; then
 fi
 
 if [ "$WRITE" = true ]; then
-  cd src
-  zip -q -r ../crx/$BASE_NAME-$VERSION.zip *
-  echo "Created crx/$BASE_NAME-$VERSION.zip"
+  cd $SOURCE_DIR
+  zip -q -r $OLDPWD/$OUTPUT_DIR/$BASE_NAME-$VERSION$FILE_EXTENSION *
+  echo "Created $OUTPUT_DIR/$BASE_NAME-$VERSION$FILE_EXTENSION"
 else
   echo "Didn't do anything."
 fi
