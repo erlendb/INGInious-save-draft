@@ -14,7 +14,6 @@ Når du åpner en øving, så sjekker utvidelsen om alle inputer er tomme. Hvis 
 
 ## Bugs og todo
 
-* Itererer over den radioknappen man trykker en gang mer enn nødvendig. Kanskje droppe iterasjon og løse det annerledes
 * Tar enn så lenge bare hensyn til sjekkbokser og radioknapper
 * Lagrer ikke tekstsvar (kodeøvinger f.eks.)
 * Gjøre om fra local storage til sync

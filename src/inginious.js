@@ -54,7 +54,10 @@ function storeAnswer(inputElm, iterateRadios) {
 	// Hvis brukeren har trykket en radioknapp, så må de andre radioknappene på samme spørsmål lagres som tomme
 	if (type == 'radio' && iterateRadios) {
 		inputElm.closest('.panel-body').find('input').each(function(){
-			storeAnswer($(this), false);
+			// Hopper over den radopknappen som utløste iterasjonen (og som allerede har blitt lagret)
+			if ($(this).val() != inputElm.val()) {
+				storeAnswer($(this), false);
+			}
 		});
 	}
 }
