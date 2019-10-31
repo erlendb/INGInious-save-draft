@@ -3,8 +3,8 @@
       "js": ["jquery.js", "inginious.js", "injector.js"],
       "matches": [ "*" ]
    } ],
-   "description": "Med denne dingsen blir svarene dine lagret i INGInious :)",
-   "homepage_url": "https://github.com/erlendb/Lagre-kladd-inginious",
+   "description": "This thing let you store your INGInious answers as a draft without submitting :)",
+   "homepage_url": "https://github.com/erlendb/INGInious-save-draft",
    "icons": {
       "128": "icons/icon-128.png",
       "64": "icons/icon-64.png",
@@ -20,14 +20,14 @@
          "32": "icons/icon-32.png",
          "16": "icons/icon-16.png"
       },
-	  "default_title": "Lagre kladd i INGInious"
+	  "default_title": "Save draft in INGInious"
    },
    "web_accessible_resources": [
       "icons/*"
    ],
    "manifest_version": 2,
-   "name": "Lagre kladd i INGInious",
-   "short_name": "Lagre kladd",
+   "name": "Save draft in INGInious",
+   "short_name": "Save draft",
    "permissions": [ "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "0.0.3"
