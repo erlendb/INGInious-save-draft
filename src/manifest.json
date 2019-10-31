@@ -3,10 +3,6 @@
       "js": ["jquery.js", "inginious.js", "injector.js"],
       "matches": [ "*://*.algdat.idi.ntnu.no/*" ]
    } ],
-   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-   },
    "description": "Med denne dingsen blir svarene dine lagret i INGInious :)",
    "homepage_url": "https://github.com/erlendb/Lagre-kladd-inginious",
    "icons": {
