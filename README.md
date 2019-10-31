@@ -20,7 +20,3 @@ When you open an exercise, the extension checks to see if all the inputs are emp
 The easiest thing is to install the extension from the Chrome Web Store.
 
 To load the extension from the source code, do the following: Open *chrome://extensions* in Chrome. Enable "Developer mode". Press "Load unpacked". Navigate to *INGInious-save-draft/src/* and load from there.
-
-### Easy extraction of crx/zip file from source
-
-Run `./create`. Then the content of *src/* is zipped and the zip file is saved as *crx/extension_name-version.zip*. The version number is taken from *src/manifest.json*. You will be asked before the script overwrites anything.
