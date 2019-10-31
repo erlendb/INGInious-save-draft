@@ -8,7 +8,7 @@ $('input').change(function() {
 // Load stored answers when the user visits the test
 $(document).ready(function(){
 	if (isTestEmpty()) {
-		getAnswers();
+		loadAnswers();
 	}
 });
 
@@ -54,14 +54,14 @@ function storeAnswer(inputElm, iterateRadios) {
 }
 
 // Iterates over checkboxes and radio buttons, and collects the stored answers
-function getAnswers() {
+function loadAnswers() {
 	$('.panel-body').find('input').each(function() {
-		getAnswer($(this));
+		loadAnswer($(this));
 	});
 }
 
 // Retrieves an answer belonging to an input and checks the box if the stored answers is true
-function getAnswer(inputElm) {
+function loadAnswer(inputElm) {
 	test				= href.substr(href.lastIndexOf('/')).slice(1);
 	name				= inputElm.attr('name');
 	value				= inputElm.val();
