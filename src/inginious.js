@@ -1,18 +1,18 @@
 function inject_inginious() {
 
-// Lagrer svar hver gang brukeren endrer på en input (aka trykker på en sjekkboks/radioknapp)
+// Save answers every time the user changes an input
 $('input').change(function() {
 	storeAnswer($(this), true);
 });
 
-// Laster inn lagrede svar idet brukeren går inn på testen
+// Load stored answers when the user visits the test
 $(document).ready(function(){
 	if (isTestEmpty()) {
 		getAnswers();
 	}
 });
 
-// Sjekker om testen er tom (altså om alle sjekkboksene/radioknappene er tomme)
+// Checks if all the answers are empty
 function isTestEmpty() {
 	empty = true;
 	$('.panel-body').find('input').each(function() {
@@ -23,14 +23,14 @@ function isTestEmpty() {
 	return empty;
 }
 
-// Itererer over alle sjekkbokser/radioknapper og lagrer svarene
+// Iterates over all checkboxes and radio buttons and stores the answers
 function storeAnswers() {
 	$('.panel-body').find('input').each(function() {
 		storeAnswer($(this), false);
 	});
 }
 
-// Lagrer et svar. Format: [test/name/value] => checked
+// Stores an answer. Format: [test/name/value] => checked
 function storeAnswer(inputElm, iterateRadios) {
 	test		= href.substr(href.lastIndexOf('/')).slice(1);
 	name		= inputElm.attr('name');
@@ -42,10 +42,10 @@ function storeAnswer(inputElm, iterateRadios) {
 
 	chrome.storage.local.set({[storageKey]: storageValue}, function(){});
 
-	// Hvis brukeren har trykket en radioknapp, så må de andre radioknappene på samme spørsmål lagres som tomme
+	// If the user has clicked a radio button, then all the other radio buttons on the same question has to be stored as empty
 	if (type == 'radio' && iterateRadios) {
 		inputElm.closest('.panel-body').find('input').each(function(){
-			// Hopper over den radopknappen som utløste iterasjonen (og som allerede har blitt lagret)
+			// Ignores the radio button that started the iteration (and therefore has already been stored)
 			if ($(this).val() != inputElm.val()) {
 				storeAnswer($(this), false);
 			}
@@ -53,14 +53,14 @@ function storeAnswer(inputElm, iterateRadios) {
 	}
 }
 
-// Itererer over sjekkbokser/radioknapper og henter lagrede svar
+// Iterates over checkboxes and radio buttons, and collects the stored answers
 function getAnswers() {
 	$('.panel-body').find('input').each(function() {
 		getAnswer($(this));
 	});
 }
 
-// Henter et svar tilhørende en input og trykker på boksen hvis det er lagret et positivt svar
+// Retrieves an answer belonging to an input and checks the box if the stored answers is true
 function getAnswer(inputElm) {
 	test				= href.substr(href.lastIndexOf('/')).slice(1);
 	name				= inputElm.attr('name');
