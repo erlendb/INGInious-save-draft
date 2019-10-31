@@ -1,7 +1,7 @@
 {
    "content_scripts": [ {
       "js": ["jquery.js", "inginious.js", "injector.js"],
-      "matches": [ "*://*.algdat.idi.ntnu.no/*" ]
+      "matches": [ "*" ]
    } ],
    "description": "Med denne dingsen blir svarene dine lagret i INGInious :)",
    "homepage_url": "https://github.com/erlendb/Lagre-kladd-inginious",
