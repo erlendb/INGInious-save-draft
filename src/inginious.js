@@ -12,15 +12,6 @@ $(document).ready(function(){
 	}
 });
 
-// Lytter ett bedkjed fra bakgrunnsskriptet. Når det kommer beskjed, så skal kladden lagres
-chrome.runtime.onMessage.addListener(
-	function(request, sender, sendResponse) {
-	  if (request.message == "storeAnswers") {
-			storeAnswers();
-		}
-	}
-);
-
 // Sjekker om testen er tom (altså om alle sjekkboksene/radioknappene er tomme)
 function isTestEmpty() {
 	empty = true;
