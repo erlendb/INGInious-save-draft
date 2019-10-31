@@ -1,26 +1,26 @@
-# Automatisk lagre kladd i INGInious (Algdat-øvingssystemet)
+# Automatically save draft in INGInious
 
-Du kan installere utvidelsen fra Chrome nettmarked: https://chrome.google.com/webstore/detail/lagre-kladd-i-inginious/bilkdbfjjbggekiddbkblbaehjfiocic?hl=no
+You can install this extension from the Chrome Web Store: (link to be inserted)
 
-Dette er en Chrome-utvidelse som automatisk lagrer svarene dine i INGInious. Neste gang du logger deg på for å fullføre øvingen, så fortsetter du der du slapp. Svarene lagres ikke på INGInious-brukeren din, men lokalt i nettleseren. Det betyr at du må bruke samme datamaskin med samme nettleser for å finne svarene dine igjen.
+This is a Chrome extension that automatically saves your replies to INGInious. The next time you log in to complete the exercise, you continue where you left off. The answers are not stored on your INGInious user, but locally on the browser. That means you have to use the same computer with the same browser to find your answers again.
 
-## Hvordan funker utvidelsen?
+## How does the extension work?
 
-Hver gang du endrer på en input i øvingen, så lagrer utvidelsen det nye svaret i Chrome sin "local storage".
+Each time you change an input into the exercise, the extension stores the new answer in Chrome's "local storage".
 
-Når du åpner en øving, så sjekker utvidelsen om alle inputer er tomme. Hvis alt er tomt, så antar den at du ønsker å hente fram kladden for å fortsette der du slapp &mdash; så da henter den fram svarene som den lagret sist.
+When you open an exercise, the extension checks to see if all the inputs are empty. If everything is empty, then it assumes that you want to pick up the draft to continue where you left off &mdash; so then it retrieves the answers it last saved.
 
-## Bugs og todo
+## Bugs and todo
 
-* Tar enn så lenge bare hensyn til sjekkbokser og radioknapper
-* Gjøre om fra local storage til sync
+* Only considering checkboxes and radio buttons
+* Convert from local storage to sync
 
-## Hvordan installere fra kildekode
+## How to install from source code
 
-Det enkleste er å installere utvidelsen fra Chrome nettmarked.
+The easiest thing is to install the extension from the Chrome Web Store.
 
-For å laste inn utvidelsen fra kildekoden må du gjøre følgende: Åpne *chrome://extensions* i Chrome. Aktiver "Developer mode". Trykk på "Load unpacked". Naviger til *Lagre-kladd-inginious/src/* og last inn derfra.
+To load the extension from the source code, do the following: Open *chrome://extensions* in Chrome. Enable "Developer mode". Press "Load unpacked". Navigate to *INGInious-save-draft/src/* and load from there.
 
-### Enkel pakking av crx/zip-fil fra kildekode
+### Easy extraction of crx/zip file from source
 
-Kjør `./create`. Da zippes innholdet i *src/*, og zipfila lagres som *crx/utvidelsenavn-versjon.zip*. Versjonsnummeret hentes fra *src/manifest.json*. Du blir spurt før skriptet eventuelt skriver over noe.
+Run `./create`. Then the content of *src/* is zipped and the zip file is saved as *crx/extension_name-version.zip*. The version number is taken from *src/manifest.json*. You will be asked before the script overwrites anything.
