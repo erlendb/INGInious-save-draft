@@ -1,16 +1,18 @@
 function inject_inginious() {
 
-// Save answers every time the user changes an input
-$('input').change(function() {
-	storeAnswer($(this), true);
-});
+	// Save answers every time the user changes an input
+	$('input').change(function() {
+		storeAnswer($(this), true);
+	});
 
-// Load stored answers when the user visits the test
-$(document).ready(function(){
-	if (isTestEmpty()) {
-		loadAnswers();
-	}
-});
+	// Load stored answers when the user visits the test
+	$(document).ready(function(){
+		if (isTestEmpty()) {
+			loadAnswers();
+		}
+	});
+
+}
 
 // Checks if all the answers are empty
 function isTestEmpty() {
@@ -32,7 +34,6 @@ function storeAnswers() {
 
 // Stores an answer. Format: [test/name/value] => checked
 function storeAnswer(inputElm, iterateRadios) {
-	test		= href.substr(href.lastIndexOf('/')).slice(1);
 	name		= inputElm.attr('name');
 	value		= inputElm.val();
 	checked	= inputElm.prop('checked');
@@ -62,7 +63,6 @@ function loadAnswers() {
 
 // Retrieves an answer belonging to an input and checks the box if the stored answers is true
 function loadAnswer(inputElm) {
-	test				= href.substr(href.lastIndexOf('/')).slice(1);
 	name				= inputElm.attr('name');
 	value				= inputElm.val();
 	storageKey	= test + '/' + name + '/' + value;
@@ -80,5 +80,3 @@ function loadAnswer(inputElm) {
 
 	});
 }
-
-} // inject_inginious()
