@@ -13,7 +13,6 @@ When you open an exercise, the extension checks to see if all the inputs are emp
 ## Bugs and todo
 
 * Only considering checkboxes and radio buttons
-* Convert from local storage to sync
 
 ## How to install from source code
 

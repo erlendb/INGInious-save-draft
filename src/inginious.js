@@ -42,7 +42,7 @@ function saveCheckbox(inputElm) {
 	storageKey		= test + '/' + name + '/' + value;
 	storageValue	= checked;
 
-	chrome.storage.local.set({[storageKey]: storageValue}, function(){});
+	chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
 }
 
 function saveRadioButton(inputElm) {
@@ -54,7 +54,7 @@ function saveRadioButton(inputElm) {
 		storageKey		= test + '/' + name + '/' + value;
 		storageValue	= checked;
 
-		chrome.storage.local.set({[storageKey]: storageValue}, function(){});
+		chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
 	});
 }
 
@@ -71,7 +71,7 @@ function loadAnswer(inputElm) {
 	value				= inputElm.val();
 	storageKey	= test + '/' + name + '/' + value;
 
-	chrome.storage.local.get(storageKey, function(result){
+	chrome.storage.sync.get(storageKey, function(result){
 		key			= Object.keys(result)[0];
 		checked = Object.values(result)[0]
 		if (checked) {
