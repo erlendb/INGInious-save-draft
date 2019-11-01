@@ -1,8 +1,7 @@
 function inject_inginious() {
-
 	// Save answers every time the user changes an input
 	$('input').change(function() {
-		storeAnswer($(this), true);
+		saveAnswer($(this));
 	});
 
 	// Load stored answers when the user visits the test
@@ -11,7 +10,6 @@ function inject_inginious() {
 			loadAnswers();
 		}
 	});
-
 }
 
 // Checks if all the answers are empty
@@ -25,33 +23,39 @@ function isTestEmpty() {
 	return empty;
 }
 
-// Iterates over all checkboxes and radio buttons and stores the answers
-function storeAnswers() {
-	$('.panel-body').find('input').each(function() {
-		storeAnswer($(this), false);
-	});
+// Stores an answer. Format: [test/name/value] => checked
+function saveAnswer(inputElm) {
+	type = inputElm.attr('type')
+
+	if (type == 'radio') {
+		saveRadioButton(inputElm);
+	}
+	else if (type == 'checkbox') {
+		saveCheckbox(inputElm);
+	}
 }
 
-// Stores an answer. Format: [test/name/value] => checked
-function storeAnswer(inputElm, iterateRadios) {
+function saveCheckbox(inputElm) {
 	name		= inputElm.attr('name');
 	value		= inputElm.val();
 	checked	= inputElm.prop('checked');
-	type		= inputElm.attr('type')
 	storageKey		= test + '/' + name + '/' + value;
 	storageValue	= checked;
 
 	chrome.storage.local.set({[storageKey]: storageValue}, function(){});
+}
 
-	// If the user has clicked a radio button, then all the other radio buttons on the same question has to be stored as empty
-	if (type == 'radio' && iterateRadios) {
-		inputElm.closest('.panel-body').find('input').each(function(){
-			// Ignores the radio button that started the iteration (and therefore has already been stored)
-			if ($(this).val() != inputElm.val()) {
-				storeAnswer($(this), false);
-			}
-		});
-	}
+function saveRadioButton(inputElm) {
+	// All the other radio buttons on the same question has to be stored as empty
+	inputElm.closest('.panel-body').find('input').each(function(){
+		name		= $(this).attr('name');
+		value		= $(this).val();
+		checked	= $(this).prop('checked');
+		storageKey		= test + '/' + name + '/' + value;
+		storageValue	= checked;
+
+		chrome.storage.local.set({[storageKey]: storageValue}, function(){});
+	});
 }
 
 // Iterates over checkboxes and radio buttons, and collects the stored answers
