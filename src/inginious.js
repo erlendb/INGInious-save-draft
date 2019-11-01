@@ -1,19 +1,19 @@
 function inject_inginious() {
 	// Save answers every time the user changes an input
-	$('input').change(function() {
+	$('form#task').find('div').find('input').change(function() {
 		saveAnswer($(this));
 	});
 
 	// Load stored answers when the user visits the test
 	$(document).ready(function(){
-		if (isTestEmpty()) {
+		if (isTestUnanswered()) {
 			loadAnswers();
 		}
 	});
 }
 
-// Checks if all the answers are empty
-function isTestEmpty() {
+// Checks if test is unanswered (i.e. all the answers are empty)
+function isTestUnanswered() {
 	empty = true;
 	$('form#task').find('div').find('input').each(function() {
 		if ($(this).prop('checked')) {
@@ -42,7 +42,6 @@ function saveCheckbox(inputElm) {
 	storageKey		= test + '/' + name + '/' + value;
 	storageValue	= checked;
 
-	console.log('set: ' + storageKey + ' = ' + storageValue);
 	chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
 }
 
@@ -55,7 +54,6 @@ function saveRadioButton(inputElm) {
 		storageKey		= test + '/' + name + '/' + value;
 		storageValue	= checked;
 
-		console.log('set: ' + storageKey + ' = ' + storageValue);
 		chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
 	});
 }
@@ -63,17 +61,22 @@ function saveRadioButton(inputElm) {
 // Iterates over checkboxes and radio buttons, and collects the stored answers
 function loadAnswers() {
 	$('form#task').find('div').find('input').each(function() {
-		loadAnswer($(this));
+		type = $(this).attr('type')
+
+		if (type == 'checkbox') {
+			loadCheckbox($(this));
+		} else if (type == 'radio') {
+			loadRadioButton($(this));
+		}
 	});
 }
 
-// Retrieves an answer belonging to an input and checks the box if the stored answers is true
-function loadAnswer(inputElm) {
+// Retrieves a checkbox answer
+function loadCheckbox(inputElm) {
 	name				= inputElm.attr('name');
 	value				= inputElm.val();
 	storageKey	= test + '/' + name + '/' + value;
 
-	console.log('get: ' + storageKey);
 	chrome.storage.sync.get(storageKey, function(result){
 		key			= Object.keys(result)[0];
 		checked = Object.values(result)[0]
@@ -86,4 +89,9 @@ function loadAnswer(inputElm) {
 		}
 
 	});
+}
+
+// Retrieves a radio button answer
+function loadRadioButton(inputElm) {
+	loadCheckbox(inputElm); // Use the checkbox loading logic
 }
