@@ -1,7 +1,7 @@
 {
    "content_scripts": [ {
       "js": ["jquery.js", "inginious.js", "injector.js"],
-      "matches": [ "*" ]
+      "matches": ["*://*/*"]
    } ],
    "description": "This thing let you store your INGInious answers as a draft without submitting :)",
    "homepage_url": "https://github.com/erlendb/INGInious-save-draft",
