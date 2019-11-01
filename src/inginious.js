@@ -15,7 +15,7 @@ function inject_inginious() {
 // Checks if all the answers are empty
 function isTestEmpty() {
 	empty = true;
-	$('.panel-body').find('input').each(function() {
+	$('form#task').find('div').find('input').each(function() {
 		if ($(this).prop('checked')) {
 			empty = false;
 		}
@@ -42,25 +42,27 @@ function saveCheckbox(inputElm) {
 	storageKey		= test + '/' + name + '/' + value;
 	storageValue	= checked;
 
+	console.log('set: ' + storageKey + ' = ' + storageValue);
 	chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
 }
 
 function saveRadioButton(inputElm) {
 	// All the other radio buttons on the same question has to be stored as empty
-	inputElm.closest('.panel-body').find('input').each(function(){
+	inputElm.parentsUntil('form').last().find('input').each(function(){
 		name		= $(this).attr('name');
 		value		= $(this).val();
 		checked	= $(this).prop('checked');
 		storageKey		= test + '/' + name + '/' + value;
 		storageValue	= checked;
 
+		console.log('set: ' + storageKey + ' = ' + storageValue);
 		chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
 	});
 }
 
 // Iterates over checkboxes and radio buttons, and collects the stored answers
 function loadAnswers() {
-	$('.panel-body').find('input').each(function() {
+	$('form#task').find('div').find('input').each(function() {
 		loadAnswer($(this));
 	});
 }
@@ -71,6 +73,7 @@ function loadAnswer(inputElm) {
 	value				= inputElm.val();
 	storageKey	= test + '/' + name + '/' + value;
 
+	console.log('get: ' + storageKey);
 	chrome.storage.sync.get(storageKey, function(result){
 		key			= Object.keys(result)[0];
 		checked = Object.values(result)[0]
