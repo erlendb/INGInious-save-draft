@@ -1,4 +1,7 @@
 function inject_inginious() {
+	// Create answers object in Chrome storage if not already exists
+	createStorageObject();
+
 	// Save answers every time the user changes an input
 	$('form#task').find('div').find('input').change(function() {
 		saveAnswer($(this));
@@ -9,6 +12,31 @@ function inject_inginious() {
 		if (isTestUnanswered()) {
 			loadAnswers();
 		}
+	});
+}
+
+function createStorageObject() {
+	chrome.storage.sync.get(origin, function(result){
+		if (result.hasOwnProperty(origin)) {
+			obj = result[origin];
+		} else {
+			obj = {};
+		}
+
+		if (!obj.hasOwnProperty(course)) {
+			obj[course] = {};
+		}
+		if (!obj[course].hasOwnProperty(test)) {
+			obj[course][test] = {};
+		}
+		$('form#task').find('div').find('input').each(function(){
+			question	= $(this).attr('name');
+			value			= $(this).val();
+			if (!obj[course][test].hasOwnProperty(question)) {
+				obj[course][test][question] = {};
+			}
+		});
+		chrome.storage.sync.set({[origin]: obj}, function(){});
 	});
 }
 
@@ -23,7 +51,7 @@ function isTestUnanswered() {
 	return empty;
 }
 
-// Stores an answer. Format: [test/name/value] => checked
+// Stores an answer.
 function saveAnswer(inputElm) {
 	type = inputElm.attr('type')
 
@@ -36,62 +64,59 @@ function saveAnswer(inputElm) {
 }
 
 function saveCheckbox(inputElm) {
-	name		= inputElm.attr('name');
-	value		= inputElm.val();
-	checked	= inputElm.prop('checked');
-	storageKey		= test + '/' + name + '/' + value;
-	storageValue	= checked;
+	question = inputElm.attr('name');
+	value		 = inputElm.val();
+	checked	 = inputElm.prop('checked');
 
-	chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
+	chrome.storage.sync.get(origin, function(storage){
+		storage[origin][course][test][question][value] = checked;
+		chrome.storage.sync.set({[origin]: storage[origin]}, function(){});
+	});
 }
 
 function saveRadioButton(inputElm) {
-	// All the other radio buttons on the same question has to be stored as empty
-	inputElm.parentsUntil('form').last().find('input').each(function(){
-		name		= $(this).attr('name');
-		value		= $(this).val();
-		checked	= $(this).prop('checked');
-		storageKey		= test + '/' + name + '/' + value;
-		storageValue	= checked;
+	// All the other radio buttons on the same question have to be stored as empty
+	chrome.storage.sync.get(origin, function(storage){
+		inputElm.parentsUntil('form').last().find('input').each(function(){
+			question = $(this).attr('name');
+			value		 = $(this).val();
+			checked	 = $(this).prop('checked');
 
-		chrome.storage.sync.set({[storageKey]: storageValue}, function(){});
+			storage[origin][course][test][question][value] = checked;
+		});
+		chrome.storage.sync.set({[origin]: storage[origin]}, function(){});
 	});
 }
 
 // Iterates over checkboxes and radio buttons, and collects the stored answers
 function loadAnswers() {
-	$('form#task').find('div').find('input').each(function() {
-		type = $(this).attr('type')
+	chrome.storage.sync.get(origin, function(storage){
+		console.log(storage);
+		$('form#task').find('div').find('input').each(function() {
+			type = $(this).attr('type');
 
-		if (type == 'checkbox') {
-			loadCheckbox($(this));
-		} else if (type == 'radio') {
-			loadRadioButton($(this));
-		}
+			if (type == 'checkbox') {
+				loadCheckbox($(this), storage);
+			} else if (type == 'radio') {
+				loadRadioButton($(this), storage);
+			}
+		});
 	});
 }
 
 // Retrieves a checkbox answer
-function loadCheckbox(inputElm) {
-	name				= inputElm.attr('name');
+function loadCheckbox(inputElm, storage) {
+	question 		= inputElm.attr('name');
 	value				= inputElm.val();
-	storageKey	= test + '/' + name + '/' + value;
 
-	chrome.storage.sync.get(storageKey, function(result){
-		key			= Object.keys(result)[0];
-		checked = Object.values(result)[0]
-		if (checked) {
-			test		= key.split('/')[0];
-			name		= key.split('/')[1];
-			value		= key.split('/')[2];
-
-			$('input[name=' + name + '][value=' + value + ']').prop('checked', true);
-		}
-
-	});
+	checked = storage[origin][course][test][question][value];
+	console.log(checked);
+	if (checked) {
+		$('input[name=' + question + '][value=' + value + ']').prop('checked', true);
+	}
 }
 
 // Retrieves a radio button answer
-function loadRadioButton(inputElm) {
-	loadCheckbox(inputElm); // Use the checkbox loading logic
+function loadRadioButton(inputElm, storage) {
+	loadCheckbox(inputElm, storage); // Use the checkbox loading logic
 }
